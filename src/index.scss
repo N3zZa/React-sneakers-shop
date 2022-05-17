@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    margin:0;
+    font-family: 'Inter',
+    system-ui;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #e7f6ff;
+}
+
+.wrapper {
+    background: #fff;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    max-width: 1080px;
+    margin: 50px auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #EAEAEA;
+
+    .headerlog {
+        display: flex;
+        align-items: center;
+        padding: 40px;
+
+        h3 {
+            text-transform: uppercase;
+        }
+
+        h3,
+        p {
+            margin: 0;
+        }
+
+        img {
+            margin-right: 16px;
+            cursor: pointer;
+        }
+    }
+
+    ul {
+        display: flex;
+        img {
+            cursor: pointer;
+        }
+        .headerfirstlink {
+            display: flex;
+
+            img {
+                margin-right: 10px;
+            }
+        }
+
+        li {
+            margin-right: 30px;
+        }
+    }
+}
+
+.content {
+    padding: 40px;
+
+    h1 {
+        margin: 0 0 40px 0;
+    }
+
+    .cards {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .card {
+        border: 1px solid #F3F3F3;
+        padding: 20px;
+        width: 210px;
+        height: 260px;
+        border-radius: 40px;
+
+        h5 {
+            font-weight: 400;
+            font-size: 14px;
+            color: #000000;
+        }
+    }
+
+    .cardPrice {
+        display: flex;
+        flex-direction: column;
+        span {
+            text-transform: uppercase;
+            font-size: 11px;
+            opacity: 0.5;
+        }
+        b {
+            font-size: 14px;
+        }
+    }
+
+    .cardInfo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        button {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #F2F2F2;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    }
+}
