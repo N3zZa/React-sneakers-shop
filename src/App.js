@@ -1,6 +1,66 @@
 function App() {
   return (
     <div className="wrapper">
+      <div className="drawerShadow">
+        <div className="drawer">
+          <h2>Корзина<img
+                className="removeBtn"
+                src="/img/btn-remove.svg"
+                alt="remove"
+              /></h2>
+          <div className="items">
+            <div className="cartItem">
+              <div
+                style={{ backgroundImage: "url(/img/sneakers/sneakers2.jpg)" }}
+                className="cartItemsneakers"
+              ></div>
+              <div className="cartItemInfo">
+                <p>Мужские Кроссовки Nike Air Max 270</p>
+                <b>12 999 руб.</b>
+              </div>
+              <img
+                className="removeBtn"
+                src="/img/btn-remove.svg"
+                alt="remove"
+              />
+            </div>
+            <div className="cartItem">
+              <div
+                style={{ backgroundImage: "url(/img/sneakers/sneakers4.jpg)" }}
+                className="cartItemsneakers"
+              ></div>
+              <div className="cartItemInfo">
+                <p>Мужские Кроссовки Nike Air Max 270</p>
+                <b>8 499 руб.</b>
+              </div>
+              <img
+                className="removeBtn"
+                src="/img/btn-remove.svg"
+                alt="remove"
+              />
+            </div>
+          </div>
+
+          <div className="cartArrangeBlock">
+            <ul className="cartArrangeInfo">
+              <li>
+                <span>Итого: </span>
+                <div></div>
+                <b>21 498 руб. </b>
+              </li>
+              <li>
+                <span>Налог 5%: </span>
+                <div></div>
+                <b>1074 руб. </b>
+              </li>
+            </ul>
+            <button className="greenButton">
+              Оформить заказ <img src="/img/arrow.svg" alt="arrow" />
+            </button>
+          </div>
+        </div>
+      </div>
+
       <header>
         <div className="header">
           <div className="headerlog">
@@ -25,10 +85,19 @@ function App() {
         </div>
       </header>
       <div className="content">
-        <h1>Все кроссовки</h1>
+        <div className="FirstBlock">
+          <h1>Все кроссовки</h1>
+          <div className="search">
+            <img src="/img/search.svg" alt="searchimg" />
+            <input placeholder="Поиск..." type="search" />
+          </div>
+        </div>
 
         <div className="cards">
           <div className="card">
+            <div className="favourite">
+              <img src="/img/whiteheart.svg" alt="heart(unliked)" />
+            </div>
             <img
               width={133}
               height={112}
@@ -101,7 +170,6 @@ function App() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
