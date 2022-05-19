@@ -1,18 +1,19 @@
+import styles from "./Header.module.scss";
 
-function Header() {
+function Header(props) {
   return (
     <header>
-      <div className="header">
-        <div className="headerlog">
+      <div className={styles.header}>
+        <div className={styles.headerlog}>
           <img width={40} height={40} src="/img/logo.png" alt="logo" />
           <div>
             <h3>React Sneakers</h3>
             <p>Магазин лучших кроссовок</p>
           </div>
         </div>
-        <ul className="headerlinks">
-          <li className="headerfirstlink">
-            <img width={18} height={18} src="/img/cart.svg" alt="cart" />
+        <ul className={styles.headerlinks}>
+          <li className={styles.headerfirstlink}>
+            <img onClick={props.onOpenCart} width={18} height={18} src="/img/cart.svg" alt="cart" />
             <span>1205 руб.</span>
           </li>
           <li>
@@ -27,4 +28,4 @@ function Header() {
   );
 }
 
-export default Header
+export default Header;

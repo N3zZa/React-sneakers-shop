@@ -1,0 +1,144 @@
+.drawerShadow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.drawer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 420px;
+    height: 100%;
+    right: 0;
+    background: #FFFFFF;
+    box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+
+    h2 {
+        margin: 0 0 30px 0;
+        font-size: 24px;
+        display: flex;
+        justify-content: space-between;
+
+        img {
+            transition: opacity .15s ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+
+    .items {
+        flex: 1;
+        overflow: auto;
+    }
+
+    .cartItem {
+        display: flex;
+        align-items: center;
+        border: 1px solid #F3F3F3;
+        border-radius: 20px;
+        overflow: hidden;
+        padding: 20px;
+        margin-bottom: 20px;
+
+
+        .cartItemsneakers {
+            margin-right: 20px;
+            height: 80px;
+            width: 80px;
+            background-size: contain;
+            background-position: 0 -3px;
+            background-repeat: no-repeat;
+        }
+
+        .cartItemInfo {
+            margin-right: 20px;
+            flex: 1;
+
+            p {
+                margin: 0;
+                font-weight: 400;
+            }
+
+            b {
+                font-size: 14px;
+            }
+        }
+
+        .removeBtn {
+            opacity: 0.5;
+            transition: opacity .15s ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    .cartArrangeBlock {
+        display: flex;
+        flex-direction: column;
+
+        div {
+            flex: 1;
+            height: 1px;
+            border-bottom: 1px dashed #DFDFDF;
+            position: relative;
+            top: -4px;
+            margin: 0 8px;
+        }
+
+        li {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .greenButton {
+            background: #9DD558;
+            border-radius: 18px;
+            height: 55px;
+            border: none;
+            font-weight: 600;
+            font-size: 16px;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: background .15s ease-in-out;
+
+
+
+            &:hover {
+                background: lighten(#9dd558, 5%)
+            }
+
+            &:active {
+                background: darken(#9dd558, 5%)
+            }
+
+            position: relative;
+
+            &:hover {
+                img {
+                    transform: translateX(5px);
+                }
+            }
+
+            img {
+                position: absolute;
+                right: 30px;
+                top: 22px;
+                transition: transform .15s ease-in-out;
+            }
+
+        }
+    }
+}
