@@ -2,7 +2,7 @@ import styles from "./Drawer.module.scss";
 import React from 'react';
 
 
-function Drawer({ onClose, onRemove, items = []}) {
+function Drawer({ onClose, onRemoveFromCart, items = []}) {
 
   return (
     <div className={styles.drawerShadow}>
@@ -31,7 +31,7 @@ function Drawer({ onClose, onRemove, items = []}) {
                     <b>{obj.price} руб.</b>
                   </div>
                   <img
-                    onClick={() => onRemove(obj.id)}
+                    onClick={() => onRemoveFromCart(obj.id)}
                     className={styles.removeBtn}
                     src="/img/btn-remove.svg"
                     alt="remove"

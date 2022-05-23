@@ -7,6 +7,7 @@ import Card from "./components/Content/Card/Card";
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [cartOpened, setCartOpened] = useState(false);
 
@@ -29,21 +30,32 @@ function App() {
       .then((res) => {
         setCartItems(res.data);
       });
+      axios
+        .get("https://628667a996bccbf32d74a8c9.mockapi.io/favorites")
+        .then((res) => {
+          setFavorites(res.data);
+        });
   }, []);
 
   const onAddToCart = (obj) => {
-    /* axios.post("https://628667a996bccbf32d74a8c9.mockapi.io/cart", obj); */
+    axios.post("https://628667a996bccbf32d74a8c9.mockapi.io/cart", obj);
     setCartItems((prev) => [...prev, obj]);
   };
 
   const onRemoveItem = (id) => {
-    axios.delete(`https://628667a996bccbf32d74a8c9.mockapi.io/cart${id}`);
+    axios.delete(`https://628667a996bccbf32d74a8c9.mockapi.io/cart/${id}`);
     setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const onAddToFavorite = (obj) => {
+    axios.post("https://628667a996bccbf32d74a8c9.mockapi.io/favorites", obj);
+    setFavorites((prev) => [...prev, obj]);
   };
 
   const onHandleChangeSearchInput = (e) => {
     setSearchValue(e.target.value);
   };
+
   useEffect(() => {
     const body = document.querySelector("body");
     body.style.overflow = cartOpened ? "hidden" : "auto";
@@ -56,7 +68,11 @@ function App() {
   return (
     <div className="wrapper">
       {cartOpened && (
-        <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem} />
+        <Drawer
+          items={cartItems}
+          onClose={() => setCartOpened(false)}
+          onRemoveFromCart={onRemoveItem}
+        />
       )}
       <Header onOpenCart={() => setCartOpened(true)} />
       <div className="content">
@@ -82,7 +98,7 @@ function App() {
               title={item.title}
               price={item.price}
               imageUrl={item.imageUrl}
-              onFavorite={() => console.log("Добавили в понравившиеся")}
+              onFavorite={(obj) => onAddToFavorite(obj)}
               onPlus={(obj) => onAddToCart(obj)}
             />
           ))}
