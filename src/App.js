@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {  Route, Routes} from 'react-router-dom'
 import axios from "axios";
 import Drawer from "./components/Drawer/Drawer";
 import Header from "./components/Header/Header";
@@ -66,45 +67,50 @@ function App() {
   );
 
   return (
-    <div className="wrapper">
-      {cartOpened && (
-        <Drawer
-          items={cartItems}
-          onClose={() => setCartOpened(false)}
-          onRemoveFromCart={onRemoveItem}
-        />
-      )}
-      <Header onOpenCart={() => setCartOpened(true)} />
-      <div className="content">
-        <div className="FirstBlock">
-          <h1>
-            {searchValue
-              ? `Поиск по запросу: "${searchValue}"`
-              : "Все кроссовки"}
-          </h1>
-          <div className="search">
-            <input
-              onChange={onHandleChangeSearchInput}
-              value={searchValue}
-              placeholder="Поиск..."
-              type="search"
-            />
+      <div className="wrapper">
+        {cartOpened && (
+          <Drawer
+            items={cartItems}
+            onClose={() => setCartOpened(false)}
+            onRemoveFromCart={onRemoveItem}
+          />
+        )}
+        <Header onOpenCart={() => setCartOpened(true)} />
+
+        <Routes>
+          <Route exact path="/favorites"></Route>
+        </Routes>
+
+        <div className="content">
+          <div className="FirstBlock">
+            <h1>
+              {searchValue
+                ? `Поиск по запросу: "${searchValue}"`
+                : "Все кроссовки"}
+            </h1>
+            <div className="search">
+              <input
+                onChange={onHandleChangeSearchInput}
+                value={searchValue}
+                placeholder="Поиск..."
+                type="search"
+              />
+            </div>
+          </div>
+          <div className="cards">
+            {search.map((item, index) => (
+              <Card
+                key={index}
+                title={item.title}
+                price={item.price}
+                imageUrl={item.imageUrl}
+                onFavorite={(obj) => onAddToFavorite(obj)}
+                onPlus={(obj) => onAddToCart(obj)}
+              />
+            ))}
           </div>
         </div>
-        <div className="cards">
-          {search.map((item, index) => (
-            <Card
-              key={index}
-              title={item.title}
-              price={item.price}
-              imageUrl={item.imageUrl}
-              onFavorite={(obj) => onAddToFavorite(obj)}
-              onPlus={(obj) => onAddToCart(obj)}
-            />
-          ))}
-        </div>
       </div>
-    </div>
   );
 }
 
