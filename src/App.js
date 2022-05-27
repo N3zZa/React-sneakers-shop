@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import {  Route, Routes} from 'react-router-dom'
+import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import Drawer from "./components/Drawer/Drawer";
 import Header from "./components/Header/Header";
-import Card from "./components/Content/Card/Card";
+import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
 
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
   const [cartOpened, setCartOpened] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     /*  fetch("https://628667a996bccbf32d74a8c9.mockapi.io/items") // можно использовать вместо axios
@@ -31,11 +32,11 @@ function App() {
       .then((res) => {
         setCartItems(res.data);
       });
-      axios
-        .get("https://628667a996bccbf32d74a8c9.mockapi.io/favorites")
-        .then((res) => {
-          setFavorites(res.data);
-        });
+    axios
+      .get("https://628667a996bccbf32d74a8c9.mockapi.io/favorites")
+      .then((res) => {
+        setFavorites(res.data);
+      });
   }, []);
 
   const onAddToCart = (obj) => {
@@ -48,13 +49,18 @@ function App() {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const onAddToFavorite = (obj) => {
-    axios.post("https://628667a996bccbf32d74a8c9.mockapi.io/favorites", obj);
-    setFavorites((prev) => [...prev, obj]);
-  };
-
-  const onHandleChangeSearchInput = (e) => {
-    setSearchValue(e.target.value);
+  const onAddToFavorite = async (obj) => {
+    if (favorites.find((favObj) => favObj.id === obj.id)) {
+      axios.delete(
+        `https://628667a996bccbf32d74a8c9.mockapi.io/favorites/${obj.id}`
+      );
+    } else {
+      const {data} = await axios.post(
+        "https://628667a996bccbf32d74a8c9.mockapi.io/favorites",
+        obj
+      );
+      setFavorites((prev) => [...prev, data]);
+    }
   };
 
   useEffect(() => {
@@ -66,51 +72,51 @@ function App() {
     item.title.toLowerCase().includes(searchValue)
   );
 
+  const onHandleChangeSearchInput = (e) => {
+    setSearchValue(e.target.value);
+  };
+
   return (
-      <div className="wrapper">
-        {cartOpened && (
-          <Drawer
-            items={cartItems}
-            onClose={() => setCartOpened(false)}
-            onRemoveFromCart={onRemoveItem}
-          />
-        )}
-        <Header onOpenCart={() => setCartOpened(true)} />
+    <div className="wrapper">
+      {cartOpened && (
+        <Drawer
+          items={cartItems}
+          onClose={() => setCartOpened(false)}
+          onRemoveFromCart={onRemoveItem}
+        />
+      )}
+      <Header onOpenCart={() => setCartOpened(true)} />
 
-        <Routes>
-          <Route exact path="/favorites"></Route>
-        </Routes>
-
-        <div className="content">
-          <div className="FirstBlock">
-            <h1>
-              {searchValue
-                ? `Поиск по запросу: "${searchValue}"`
-                : "Все кроссовки"}
-            </h1>
-            <div className="search">
-              <input
-                onChange={onHandleChangeSearchInput}
-                value={searchValue}
-                placeholder="Поиск..."
-                type="search"
-              />
-            </div>
-          </div>
-          <div className="cards">
-            {search.map((item, index) => (
-              <Card
-                key={index}
-                title={item.title}
-                price={item.price}
-                imageUrl={item.imageUrl}
-                onFavorite={(obj) => onAddToFavorite(obj)}
-                onPlus={(obj) => onAddToCart(obj)}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <Home
+              items={items}
+              search={search}
+              onHandleChangeSearchInput={onHandleChangeSearchInput}
+              onAddToFavorite={onAddToFavorite}
+              onAddToCart={onAddToCart}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+            />
+          }
+        ></Route>
+        <Route
+          exact
+          path="/favorites"
+          element={
+            <Favorites
+              search={search}
+              onAddToFavorite={onAddToFavorite}
+              onAddToCart={onAddToCart}
+              items={favorites}
+            />
+          }
+        ></Route>
+      </Routes>
+    </div>
   );
 }
 
