@@ -1,14 +1,15 @@
 import Card from "../components/Card/Card";
+import { Link } from "react-router-dom";
 
-function Favorites({ onAddToFavorite, onAddToCart, items }) {
+function Favorites({ onAddToFavorite, favorites }) {
   return (
     <div className="content">
       <div className="FirstBlockFavorites">
-        <img src="../../img/arrowfavorites.svg" alt="buttonarrow" />
+        <Link to='/'><img src="../../img/arrowfavorites.svg" alt="buttonarrow" /></Link>
         <h1>Избранное</h1>
       </div>
       <div className="cards">
-        {items.map((item, index) => (
+        {favorites.map((item, index) => (
           <Card
             key={index}
             favorited={true}

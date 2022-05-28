@@ -1,9 +1,7 @@
 import styles from "./Drawer.module.scss";
-import React from 'react';
+import React from "react";
 
-
-function Drawer({ onClose, onRemoveFromCart, items = []}) {
-
+function Drawer({ onClose, onRemoveFromCart, items = [] }) {
   return (
     <div className={styles.drawerShadow}>
       <div className={styles.drawer}>
@@ -21,7 +19,7 @@ function Drawer({ onClose, onRemoveFromCart, items = []}) {
           <div className={styles.parent}>
             <div className={styles.items}>
               {items.map((obj) => (
-                <div className={styles.cartItem}>
+                <div key={obj.id} className={styles.cartItem}>
                   <div
                     style={{ backgroundImage: `url(${obj.imageUrl})` }}
                     className={styles.cartItemsneakers}
@@ -77,6 +75,5 @@ function Drawer({ onClose, onRemoveFromCart, items = []}) {
     </div>
   );
 }
-
 
 export default Drawer;

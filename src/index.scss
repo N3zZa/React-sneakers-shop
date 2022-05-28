@@ -77,9 +77,12 @@ body {
 
     .FirstBlockFavorites {
         display: flex;
-        img {
-           margin-right: 21px; 
+        align-items:center;
+        Link {
            cursor: pointer;
+        }
+        img {
+            margin-right: 21px;
         }
     }
 }

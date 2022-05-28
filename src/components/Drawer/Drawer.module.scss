@@ -10,6 +10,7 @@ body {
 }
 
 .drawerShadow {
+    display: flex;
     position: absolute;
     left: 0;
     top: 0;
@@ -17,8 +18,8 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
+    position: fixed;
     overflow: hidden;
-
 }
 
 .drawer {
@@ -30,7 +31,9 @@ body {
     right: 0;
     background: #FFFFFF;
     box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+    position: fixed;
     padding: 30px;
+    z-index: 2;
 
     .cartempty {
         display: flex;
@@ -63,7 +66,7 @@ body {
             width: 245px;
             margin-top: 20px;
             justify-content: center;
-            align-items:center;
+            align-items: center;
 
             &:hover {
                 img {
