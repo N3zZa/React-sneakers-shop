@@ -1,15 +1,16 @@
 import Card from "../components/Card/Card";
-
+import React,{useContext} from 'react';
+import AppContext from "../context";
 
 function Home({
-  search,
   onHandleChangeSearchInput,
   onAddToFavorite,
   onAddToCart,
   searchValue,
-  cartItems,
   isLoading
 }) {
+
+  const { search } = useContext(AppContext);
 
   return (
     <div className="content">
@@ -27,15 +28,11 @@ function Home({
         </div>
       </div>
       <div className="cards">
-        {(isLoading
-          ? [...Array(8)]
-          : search
-        ).map((item, index) => (
+        {(isLoading ? Array(8).fill({}) : search).map((item, index) => (
           <Card
             key={index}
             onFavorite={(obj) => onAddToFavorite(obj)}
             onPlus={(obj) => onAddToCart(obj)}
-            added={cartItems.some((obj) => +obj.id === +item.id)}
             loading={isLoading}
             {...item}
           />

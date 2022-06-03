@@ -1,11 +1,18 @@
 import Card from "../components/Card/Card";
 import { Link } from "react-router-dom";
+import React, {useContext} from "react"
+import AppContext from "../context"
 
-function Favorites({ onAddToFavorite, favorites }) {
+function Favorites() {
+
+const { favorites, onAddToFavorite } = useContext(AppContext);
+
   return (
     <div className="content">
       <div className="FirstBlockFavorites">
-        <Link to='/'><img src="../../img/arrowfavorites.svg" alt="buttonarrow" /></Link>
+        <Link to="/">
+          <img src="../../img/arrowfavorites.svg" alt="buttonarrow" />
+        </Link>
         <h1>Избранное</h1>
       </div>
       <div className="cards">
