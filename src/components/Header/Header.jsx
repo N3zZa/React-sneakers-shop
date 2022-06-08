@@ -1,8 +1,12 @@
 import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
+import React from 'react';
+import { useCart } from "../../hooks/useCart";
 
 
 function Header({ onOpenCart }) {
+  const { sumPrice } = useCart();
+
   return (
     <header>
       <div className={styles.header}>
@@ -24,7 +28,7 @@ function Header({ onOpenCart }) {
               src="/img/cart.svg"
               alt="cart"
             />
-            <span>1205 руб.</span>
+            <span>{sumPrice} руб.</span>
           </li>
           <li>
             <Link to="/favorites">
@@ -32,7 +36,9 @@ function Header({ onOpenCart }) {
             </Link>
           </li>
           <li>
-            <img width={18} height={18} src="/img/user.svg" alt="user" />
+            <Link to="/userOrders">
+              <img width={18} height={18} src="/img/user.svg" alt="user" />
+            </Link>
           </li>
         </ul>
       </div>

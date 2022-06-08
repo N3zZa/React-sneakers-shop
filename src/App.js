@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import AppContext from "./context"
+import UserOrders from "./pages/UserOrders";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -18,13 +19,6 @@ function App() {
   
   
   useEffect(() => {
-    /*  fetch("https://628667a996bccbf32d74a8c9.mockapi.io/items") // можно использовать вместо axios
-    .then((res) => {
-      return res.json();
-    })
-    .then((json) => {
-      setItems(json);
-    }); */
     
     async function fetchData() {
       const cartResponse = await axios.get(
@@ -55,7 +49,7 @@ function App() {
       } else {
         axios.post("https://628667a996bccbf32d74a8c9.mockapi.io/cart", obj);
         setCartItems((prev) => [...prev, obj]);
-      }
+      } 
      } catch {
        alert("Не удалось добавить в корзину")
      }
@@ -112,8 +106,9 @@ function App() {
           search,
           isItemAdded,
           onAddToFavorite,
+          onAddToCart,
           setCartOpened,
-          setCartItems
+          setCartItems,
         }}
       >
         <div className="wrapper">
@@ -145,6 +140,11 @@ function App() {
               exact
               path="/favorites"
               element={<Favorites onAddToCart={onAddToCart} />}
+            ></Route>
+            <Route
+              exact
+              path="/userOrders"
+              element={<UserOrders />}
             ></Route>
           </Routes>
         </div>

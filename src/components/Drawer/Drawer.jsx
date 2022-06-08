@@ -1,40 +1,40 @@
 import styles from "./Drawer.module.scss";
-import React,{useState,useContext} from "react";
+import React, { useState } from "react";
 import Info from "../info/info";
-import AppContext from "../../context";
 import axios from "axios";
+import { useCart } from "../../hooks/useCart";
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Drawer({ onClose, onRemoveFromCart, items = [] }) {
-
-  const {cartItems, setCartItems} = useContext(AppContext);
+  const {cartItems, setCartItems, sumPrice} = useCart();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [orderId, setOrderId] = useState(null);
 
-const onClickOrder = async () => {
-  try {
-    setIsLoading(true);
-    const { data } = await axios.post(
-    "https://628667a996bccbf32d74a8c9.mockapi.io/orders",
-    {items:cartItems,}
-  );
-  setOrderId(data.id)
-  setIsCompleted(true);
-  setCartItems([])
+  const onClickOrder = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(
+        "https://628667a996bccbf32d74a8c9.mockapi.io/orders",
+        { items: cartItems }
+      );
+      setOrderId(data.id);
+      setIsCompleted(true);
+      setCartItems([]);
 
-  for (let i = 0; i < cartItems.length; i++) {
-    const item = cartItems[i];
-    await axios.delete("https://628667a996bccbf32d74a8c9.mockapi.io/cart/" + item.id)
-    await delay(1000);
-  } 
-  } catch (error) {
-    alert("Ошибка при оформлении заказа :(")
-  }
-  setIsLoading(false);
-}
-
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i];
+        await axios.delete(
+          "https://628667a996bccbf32d74a8c9.mockapi.io/cart/" + item.id
+        );
+        await delay(1000);
+      }
+    } catch (error) {
+      alert("Ошибка при оформлении заказа :(");
+    }
+    setIsLoading(false);
+  };
 
   return (
     <div className={styles.drawerShadow}>
@@ -76,15 +76,19 @@ const onClickOrder = async () => {
                 <li>
                   <span>Итого: </span>
                   <div></div>
-                  <b>21 498 руб. </b>
+                  <b>{sumPrice * 0.95} руб. </b>
                 </li>
                 <li>
                   <span>Налог 5%: </span>
                   <div></div>
-                  <b>1074 руб. </b>
+                  <b>{sumPrice * 0.05} руб. </b>
                 </li>
               </ul>
-              <button disabled={isLoading} onClick={onClickOrder} className={styles.greenButton}>
+              <button
+                disabled={isLoading}
+                onClick={onClickOrder}
+                className={styles.greenButton}
+              >
                 Оформить заказ <img src="/img/arrow.svg" alt="arrow" />
               </button>
             </div>
