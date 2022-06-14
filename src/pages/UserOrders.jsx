@@ -26,7 +26,7 @@ function UserOrders() {
     <div className="content">
       <div className="FirstBlockFavorites">
         <Link to="/">
-          <img src="../../img/arrowfavorites.svg" alt="buttonarrow" />
+          <img src="img/arrowfavorites.svg" alt="buttonarrow" />
         </Link>
         <h1>Мои заказы</h1>
       </div>

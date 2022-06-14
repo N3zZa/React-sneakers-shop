@@ -6,7 +6,7 @@ import { useCart } from "../../hooks/useCart";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function Drawer({ onClose, onRemoveFromCart, items = [] }) {
+function Drawer({ onClose, onRemoveFromCart, items = [], opened }) {
   const {cartItems, setCartItems, sumPrice} = useCart();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,14 +37,18 @@ function Drawer({ onClose, onRemoveFromCart, items = [] }) {
   };
 
   return (
-    <div className={styles.drawerShadow}>
+    <div
+      className={
+        `${styles.overlay} ${opened ? styles.overlayVisible : styles.overlayHidden}`
+      }
+    >
       <div className={styles.drawer}>
         <h2>
           Корзина
           <img
             onClick={onClose}
             className={styles.removeBtn}
-            src="/img/btn-remove.svg"
+            src="img/btn-remove.svg"
             alt="remove"
           />
         </h2>
@@ -65,7 +69,7 @@ function Drawer({ onClose, onRemoveFromCart, items = [] }) {
                   <img
                     onClick={() => onRemoveFromCart(obj.id)}
                     className={styles.removeBtn}
-                    src="/img/btn-remove.svg"
+                    src="img/btn-remove.svg"
                     alt="remove"
                   />
                 </div>

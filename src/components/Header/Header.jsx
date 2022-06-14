@@ -12,7 +12,7 @@ function Header({ onOpenCart }) {
       <div className={styles.header}>
         <Link to="/">
           <div className={styles.headerlog}>
-            <img width={40} height={40} src="/img/logo.png" alt="logo" />
+            <img width={40} height={40} src="img/logo.png" alt="logo" />
             <div>
               <h3>React Sneakers</h3>
               <p>Магазин лучших кроссовок</p>
@@ -25,19 +25,19 @@ function Header({ onOpenCart }) {
               onClick={onOpenCart}
               width={18}
               height={18}
-              src="/img/cart.svg"
+              src="img/cart.svg"
               alt="cart"
             />
             <span>{sumPrice} руб.</span>
           </li>
           <li>
             <Link to="/favorites">
-              <img width={18} height={18} src="/img/likes.svg" alt="likes" />
+              <img width={18} height={18} src="img/likes.svg" alt="likes" />
             </Link>
           </li>
           <li>
             <Link to="/userOrders">
-              <img width={18} height={18} src="/img/user.svg" alt="user" />
+              <img width={18} height={18} src="img/user.svg" alt="user" />
             </Link>
           </li>
         </ul>

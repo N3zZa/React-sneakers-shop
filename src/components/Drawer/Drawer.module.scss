@@ -9,7 +9,7 @@ body {
     flex: 1;
 }
 
-.drawerShadow {
+.overlay {
     display: flex;
     position: absolute;
     left: 0;
@@ -19,8 +19,20 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
     position: fixed;
-    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
 }
+
+.overlayVisible {
+    visibility: visible;
+    opacity: 1;
+
+    .drawer {
+        transform: translateX(0);
+    }
+}
+
 
 .drawer {
     display: flex;
@@ -34,8 +46,10 @@ body {
     position: fixed;
     padding: 30px;
     z-index: 2;
-
-
+    transform: translateX(100%);
+    transition: transform .3s
+        cubic-bezier(.38, -0.01, .6, .99);
+    overflow: auto;
 
 
     h2 {

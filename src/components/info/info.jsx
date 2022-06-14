@@ -4,7 +4,7 @@ import styles from "../info/info.module.scss"
 
 export const Info = ({title, description, image}) => {
 
-  const { setCartOpened, setCartItems } = useContext(AppContext);
+  const { setCartOpened } = useContext(AppContext);
 
   return (
     <div className={styles.cartempty}>
@@ -12,7 +12,7 @@ export const Info = ({title, description, image}) => {
       <h2>{title}</h2>
       <p>{description}</p>
       <button onClick={() => setCartOpened(false)} className={styles.greenButton}>
-        <img src="/img/arrow.svg" alt="arrow" />
+        <img src="img/arrow.svg" alt="arrow" />
         Вернуться назад
       </button>
     </div>

@@ -11,7 +11,7 @@ const { favorites, onAddToFavorite } = useContext(AppContext);
     <div className="content">
       <div className="FirstBlockFavorites">
         <Link to="/">
-          <img src="../../img/arrowfavorites.svg" alt="buttonarrow" />
+          <img src="img/arrowfavorites.svg" alt="buttonarrow" />
         </Link>
         <h1>Избранное</h1>
       </div>
